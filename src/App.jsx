@@ -8,7 +8,6 @@
 // import ListKeys from "./Listkeys";
 // import Communicate from "./Communicate";
 // import ShoppingPhone from "./ShoppingPhone";
-// import ShoeStore from "./ShoeShopping";
 import ShoppingPhoneRedux from "./ShoppingPhoneRedux/index.jsx";
 
 const App = () => {
@@ -24,7 +23,6 @@ const App = () => {
       {/* <Communicate /> */}
         {/* <ShoppingPhone /> */}
          <ShoppingPhoneRedux />
-      {/*<ShoeStore />*/}
     </div>
   );
 };

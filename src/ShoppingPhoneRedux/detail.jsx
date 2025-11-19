@@ -1,10 +1,11 @@
-export default function Detail(props) {
-  const { productDetailProp } = props;
+import {useSelector} from "react-redux";
+
+export default function Detail() {
+    const productDetailProp = useSelector(state => state.shoppingPhoneReducer.productDetails);
   return (
     <div className="container mx-auto grid grid-cols-2 gap-10">
       <div>
         <img
-          className=""
           src={productDetailProp && productDetailProp.hinhAnh}
           alt="vsphone.jpg"
         />
