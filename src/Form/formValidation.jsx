@@ -23,13 +23,38 @@ function FormValidation() {
             soDT: Yup.string().required("SĐT không được để trống").matches(/^[0-9]{10}$/, "SĐT phải gồm 10 số"),
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            handleSubmit(values);
         }
     })
 
-    const handleSubmit = () => {
-        dispatch(addStudent(students))
+    const handleSubmit = (e) => {
+        dispatch(addStudent(e))
     };
+
+    const renderStudentTable = () => {
+        return students?.map((student) => {
+            return(
+                <tr>
+                    <td className="px-6 py-3 text-sm text-gray-700">{student.maSV}</td>
+                    <td className="px-6 py-3 text-sm text-gray-700">{student.hoTen}</td>
+                    <td className="px-6 py-3 text-sm text-gray-700">{student.soDT}</td>
+                    <td className="px-6 py-3 text-sm text-gray-700">{student.email}</td>
+                    <td className="px-6 py-3 text-sm text-gray-700">
+                        <button
+                            className="me-2 inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
+                        >Sửa
+                        </button>
+                        <button
+                            className="inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+
+                        >Xóa
+                        </button>
+                    </td>
+                </tr>
+            )
+        })
+    }
 
     return (
         <main className="bg-gray-200 min-h-screen flex justify-center py-10">
@@ -111,7 +136,6 @@ function FormValidation() {
                             {/*Nút thêm*/}
                             <button
                                 disabled={!formValidation.isValid}
-                                onClick={handleSubmit}
                                 type="submit"
                                 className="mt-2 inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                             >
@@ -151,24 +175,7 @@ function FormValidation() {
                             </thead>
                             <tbody id="studentTableBody" className="bg-white divide-y divide-gray-200">
                             {/*Dữ liệu mẫu*/}
-                            <tr>
-                                <td className="px-6 py-3 text-sm text-gray-700">1</td>
-                                <td className="px-6 py-3 text-sm text-gray-700">Nguyễn Văn A</td>
-                                <td className="px-6 py-3 text-sm text-gray-700">0938111111</td>
-                                <td className="px-6 py-3 text-sm text-gray-700">nguyenvana@gmail.com</td>
-                                <td className="px-6 py-3 text-sm text-gray-700">
-                                    <button
-                                        className="me-2 inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-
-                                    >Sửa
-                                    </button>
-                                    <button
-                                        className="inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
-
-                                    >Xóa
-                                    </button>
-                                </td>
-                            </tr>
+                            {renderStudentTable()}
                             </tbody>
                         </table>
                     </div>
