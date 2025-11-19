@@ -22,12 +22,12 @@ export default function Cart() {
                         <img src={product.hinhAnh} alt={product.tenSP} width={50}/>
                     </td>
                     <td className="px-6 py-4">
-                        <button onClick={()=>dispatch(updateQuantityCart({maSP:product.maSP, status:false}))}
+                        <button onClick={() => dispatch(updateQuantityCart({maSP: product.maSP, status: false}))}
                         >
                             -
                         </button>
                         {product.soLuong}
-                        <button onClick={()=>dispatch(updateQuantityCart({maSP:product.maSP, status:true}))}>
+                        <button onClick={() => dispatch(updateQuantityCart({maSP: product.maSP, status: true}))}>
                             +
                         </button>
                     </td>

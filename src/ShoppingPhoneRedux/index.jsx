@@ -17,13 +17,12 @@ export default function ShoppingPhoneRedux() {
     };
 
     // Tính tổng số lượng sản phẩm
-    // Tính tổng số lượng sản phẩm
     const totalQty = () => {
-      const total = carts.reduce(
-        (total, product) => (total += product.soLuong),
-        0
-      );
-      return total;
+        const total = carts.reduce(
+            (total, product) => (total += product.soLuong),
+            0
+        );
+        return total;
     };
 
     return (

@@ -8,7 +8,9 @@
 // import ListKeys from "./Listkeys";
 // import Communicate from "./Communicate";
 // import ShoppingPhone from "./ShoppingPhone";
-import ShoppingPhoneRedux from "./ShoppingPhoneRedux/index.jsx";
+// import ShoppingPhoneRedux from "./ShoppingPhoneRedux/index.jsx";
+// import DemoForm from "./Form/demoForm.jsx";
+import DemoFormWithFormik from "./Form/demoFormWithFormik.jsx";
 
 const App = () => {
   return (
@@ -22,7 +24,9 @@ const App = () => {
       {/* <ListKeys /> */}
       {/* <Communicate /> */}
         {/* <ShoppingPhone /> */}
-         <ShoppingPhoneRedux />
+        {/*<ShoppingPhoneRedux />*/}
+        {/*<DemoForm />*/}
+        <DemoFormWithFormik/>
     </div>
   );
 };

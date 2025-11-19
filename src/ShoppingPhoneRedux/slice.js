@@ -42,11 +42,11 @@ const shoppingPhoneSlice = createSlice(
                 const index = findIndexCarts(maSP, state.carts);
                 if (index !== -1) {
                     let newCarts = [...state.carts];
-                    if(status) {
+                    if (status) {
                         newCarts[index].soLuong += 1;
-                    }else {
+                    } else {
                         newCarts[index].soLuong -= 1;
-                        if(newCarts[index].soLuong === 0) {
+                        if (newCarts[index].soLuong === 0) {
                             newCarts.splice(index, 1);
                         }
                     }
@@ -58,10 +58,10 @@ const shoppingPhoneSlice = createSlice(
 )
 
 const findIndexCarts = (maSP, carts) => {
-  return carts.findIndex((product) => product.maSP === maSP);
+    return carts.findIndex((product) => product.maSP === maSP);
 };
 
 
-export const {setProductDetails,addToCart,updateQuantityCart} = shoppingPhoneSlice.actions;
+export const {setProductDetails, addToCart, updateQuantityCart} = shoppingPhoneSlice.actions;
 
 export default shoppingPhoneSlice.reducer
