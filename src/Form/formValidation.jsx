@@ -2,7 +2,7 @@ import React from 'react';
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {addStudent} from "./slice.js";
+import {addStudent, editStudent, removeStudent} from "./slice.js";
 
 function FormValidation() {
     const data = useSelector((state) => state.formValidationReducer);
@@ -10,11 +10,10 @@ function FormValidation() {
     const dispatch = useDispatch();
     const formValidation = useFormik({
         initialValues: {
-            maSV:'',
+            maSV: '',
             email: '',
             hoTen: '',
-            soDT:'',
-
+            soDT: '',
         },
         validationSchema: Yup.object().shape({
             email: Yup.string().email("Email không hợp lệ").required("Email không được để trống"),
@@ -24,6 +23,7 @@ function FormValidation() {
         }),
         onSubmit: values => {
             handleSubmit(values);
+            formValidation.resetForm();
         }
     })
 
@@ -33,8 +33,8 @@ function FormValidation() {
 
     const renderStudentTable = () => {
         return students?.map((student) => {
-            return(
-                <tr>
+            return (
+                <tr key={student.maSV}>
                     <td className="px-6 py-3 text-sm text-gray-700">{student.maSV}</td>
                     <td className="px-6 py-3 text-sm text-gray-700">{student.hoTen}</td>
                     <td className="px-6 py-3 text-sm text-gray-700">{student.soDT}</td>
@@ -42,12 +42,12 @@ function FormValidation() {
                     <td className="px-6 py-3 text-sm text-gray-700">
                         <button
                             className="me-2 inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-
+                            onClick={() => dispatch(editStudent({maSV:student.maSV, status:'edit'}))}
                         >Sửa
                         </button>
                         <button
                             className="inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
-
+                            onClick={() => dispatch(removeStudent({maSV:student.maSV, status:'remove'}))}
                         >Xóa
                         </button>
                     </td>
@@ -83,7 +83,8 @@ function FormValidation() {
                                         onChange={formValidation.handleChange}
                                         value={formValidation.values.maSV}
                                     />
-                                    <p id="errorMaSV" className="text-red-500 text-xs mt-1">{formValidation.errors.maSV}</p>
+                                    {formValidation.errors.maSV && <p id="errorMaSV"
+                                                                      className="text-red-500 text-xs mt-1">{formValidation.errors.maSV}</p>}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -97,7 +98,8 @@ function FormValidation() {
                                         onChange={formValidation.handleChange}
                                         value={formValidation.values.hoTen}
                                     />
-                                    <p id="errorHoTen" className="text-red-500 text-xs mt-1">{formValidation.errors.hoTen}</p>
+                                    <p id="errorHoTen"
+                                       className="text-red-500 text-xs mt-1">{formValidation.errors.hoTen}</p>
                                 </div>
                             </div>
 
@@ -115,7 +117,8 @@ function FormValidation() {
                                         onChange={formValidation.handleChange}
                                         value={formValidation.values.soDT}
                                     />
-                                    <p id="errorSoDT" className="text-red-500 text-xs mt-1">{formValidation.errors.soDT}</p>
+                                    <p id="errorSoDT"
+                                       className="text-red-500 text-xs mt-1">{formValidation.errors.soDT}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -129,7 +132,8 @@ function FormValidation() {
                                         onChange={formValidation.handleChange}
                                         value={formValidation.values.email}
                                     />
-                                    <p id="errorEmail" className="text-red-500 text-xs mt-1">{formValidation.errors.email}</p>
+                                    <p id="errorEmail"
+                                       className="text-red-500 text-xs mt-1">{formValidation.errors.email}</p>
                                 </div>
                             </div>
 
@@ -174,7 +178,7 @@ function FormValidation() {
                             </tr>
                             </thead>
                             <tbody id="studentTableBody" className="bg-white divide-y divide-gray-200">
-                            {/*Dữ liệu mẫu*/}
+                            {/*Dữ liệu sinh viên*/}
                             {renderStudentTable()}
                             </tbody>
                         </table>
